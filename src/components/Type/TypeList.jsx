@@ -1,26 +1,26 @@
 import { Box, Center, Container, Spinner } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import axiosInstance from "../../services/axios";
-import { AddUpdateTodoModal } from "./AddUpdateTodoModal";
-import { TodoCard } from "./TodoCard";
+import { AddUpdateTypeModal } from "./AddUpdateTypeModal";
+import { TypeCard } from "./TypeCard";
 
-export const TodoList = () => {
-  const [todos, setTodos] = useState([]);
+export const TypeList = () => {
+  const [types, setTypes] = useState([]);
   const [loading, setLoading] = useState(true);
   const isMounted = useRef(false);
 
   useEffect(() => {
     if (isMounted.current) return;
-    fetchTodos();
+    fetchTypes();
     isMounted.current = true;
   }, []);
 
-  const fetchTodos = () => {
+  const fetchTypes = () => {
     setLoading(true);
     axiosInstance
-      .get("/todo/")
+      .get("/type/")
       .then((res) => {
-        setTodos(res.data);
+        setTypes(res.data);
       })
       .catch((error) => {
         console.error(error);
@@ -32,7 +32,7 @@ export const TodoList = () => {
 
   return (
     <Container mt={9}>
-      <AddUpdateTodoModal onSuccess={fetchTodos} />
+      <AddUpdateTypeModal onSuccess={fetchTypes} />
       {loading ? (
         <Center mt={6}>
           <Spinner
@@ -45,8 +45,8 @@ export const TodoList = () => {
         </Center>
       ) : (
         <Box mt={6}>
-          {todos?.map((todo) => (
-            <TodoCard todo={todo} key={todo.id} />
+          {types?.map((type) => (
+            <TypeCard type={type} key={type.id} />
           ))}
         </Box>
       )}

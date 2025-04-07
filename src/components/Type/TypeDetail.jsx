@@ -10,29 +10,29 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../services/axios";
-import { AddUpdateTodoModal } from "./AddUpdateTodoModal";
+import { AddUpdateTypeModal } from "./AddUpdateTypeModal";
 
-export const TodoDetail = () => {
-  const [todo, setTodo] = useState({});
+export const TypeDetail = () => {
+  const [type, setType] = useState({});
   const [loading, setLoading] = useState(true);
   const isMounted = useRef(false);
-  const { todoId } = useParams();
+  const { Id } = useParams();
   const navigate = useNavigate();
   const toast = useToast();
   const background = useColorModeValue("gray.300", "gray.600");
 
   useEffect(() => {
     if (isMounted.current) return;
-    fetchTodo();
+    fetchType();
     isMounted.current = true;
-  }, [todoId]);
+  }, [Id]);
 
-  const fetchTodo = () => {
+  const fetchType = () => {
     setLoading(true);
     axiosInstance
-      .get(`/todo/${todoId}`)
+      .get(`/type/${Id}`)
       .then((res) => {
-        setTodo(res.data);
+        setType(res.data);
       })
       .catch((error) => console.error(error))
       .finally(() => {
@@ -40,13 +40,13 @@ export const TodoDetail = () => {
       });
   };
 
-  const delateTodo = () => {
+  const delateType = () => {
     setLoading(true);
     axiosInstance
-      .delete(`/todo/${todoId}`)
+      .delete(`/type/${Id}`)
       .then(() => {
         toast({
-          title: "Todo deleted successfully",
+          title: "Attack Type deleted successfully",
           status: "success",
           isClosable: true,
           diration: 1500,
@@ -56,7 +56,7 @@ export const TodoDetail = () => {
       .catch((err) => {
         console.error(err);
         toast({
-          title: "Could'nt delete todo",
+          title: "Could'nt delete Details",
           status: "error",
           isClosable: true,
           diration: 2000,
@@ -100,25 +100,25 @@ export const TodoDetail = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Text fontSize={22}>{todo.title}</Text>
+        <Text fontSize={22}>{type.title}</Text>
         <Text bg="gray.500" mt={2} p={2} rounded="lg">
-          {todo.description}
+          {type.description}
         </Text>
-        <AddUpdateTodoModal
+        <AddUpdateTypeModal
           my={3}
           editable={true}
           defaultValues={{
-            title: todo.title,
-            description: todo.description,
-            status: todo.status,
+            title: type.title,
+            description: type.description,
+            status: type.status,
           }}
-          onSuccess={fetchTodo}
+          onSuccess={fetchType}
         />
         <Button
           isLoading={loading}
           colorScheme="red"
           width="100%"
-          onClick={delateTodo}
+          onClick={delateType}
         >
           Delete
         </Button>
