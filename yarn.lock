@@ -5008,6 +5008,11 @@
   dependencies:
     "minimatch" "^5.0.1"
 
+"FileReader@^0.10.2":
+  "integrity" "sha512-O0K+5KRnDBFNogBPtV5hWjyJSQOoB2j3ZLbre1pBjCdE9CNpeIUPI8IX3G7eafIZ/HsllbGaIucEbt2qL+EX0g=="
+  "resolved" "https://registry.npmjs.org/FileReader/-/FileReader-0.10.2.tgz"
+  "version" "0.10.2"
+
 "filesize@^8.0.6":
   "integrity" "sha512-pjmC+bkIF8XI7fWaH8KxHcZL3DPybs1roSKP4rKDvy20tAWwIObE4+JIseG2byfGKhud5ZnM4YSGKBz7Sh0ndQ=="
   "resolved" "https://registry.npmjs.org/filesize/-/filesize-8.0.7.tgz"
@@ -7703,6 +7708,11 @@
     "sigstore" "^3.0.0"
     "ssri" "^12.0.0"
     "tar" "^6.1.11"
+
+"papaparse@^5.5.2":
+  "integrity" "sha512-PZXg8UuAc4PcVwLosEEDYjPyfWnTEhOrUfdv+3Bx+NuAb+5NhDmXzg5fHWmdCh1mP5p7JAZfFr3IMQfcntNAdA=="
+  "resolved" "https://registry.npmjs.org/papaparse/-/papaparse-5.5.2.tgz"
+  "version" "5.5.2"
 
 "param-case@^3.0.4":
   "integrity" "sha512-RXlj7zCYokReqWpOPH9oYivUzLYZ5vAPIfEmCTNViosC78F8F0H9y7T7gG2M39ymgutxF5gcFEsyZQSph9Bp3A=="
