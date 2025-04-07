@@ -13,7 +13,6 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
-  Switch,
   useColorModeValue,
   useDisclosure,
   useToast,
@@ -23,7 +22,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../services/axios";
 import Papa from "papaparse";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export const AddUpdateTypeModal = ({
   editable = false,
@@ -34,16 +33,18 @@ export const AddUpdateTypeModal = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [formValues, setFormValues] = useState({});
   const [fileUploaded, setFileUploaded] = useState(false);
+  const fileInputRef = useRef(null);
 
   const inputBackground = useColorModeValue("gray.300", "gray.600");
-
   const toast = useToast();
   const { Id } = useParams();
+
   const {
     handleSubmit,
     register,
     control,
     setValue,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: { ...defaultValues },
@@ -87,14 +88,11 @@ export const AddUpdateTypeModal = ({
           return;
         }
 
-        // Filter out keys like '_1', '_2', etc.
         const validColumns = Object.fromEntries(
-          Object.entries(results.data[0]).filter(
-            ([key]) => !key.startsWith("_")
-          )
+          Object.entries(results.data[0]).filter(([key]) => !key.startsWith("_"))
         );
 
-        setFormValues(validColumns); // Set only valid columns
+        setFormValues(validColumns);
         setFileUploaded(true);
       },
       error: () => {
@@ -116,6 +114,15 @@ export const AddUpdateTypeModal = ({
     }));
   };
 
+  const handleClear = () => {
+    setFormValues({});
+    setFileUploaded(false);
+    reset();
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   const onSubmit = async (values) => {
     try {
       if (editable) {
@@ -130,7 +137,9 @@ export const AddUpdateTypeModal = ({
         duration: 1500,
       });
       onSuccess();
-      onClose();
+      setTimeout(() => {
+        onClose();
+      }, 1500);
     } catch (err) {
       console.error(err);
       toast({
@@ -170,53 +179,32 @@ export const AddUpdateTypeModal = ({
                   accept=".csv"
                   onChange={handleFileChange}
                   mb={4}
+                  ref={fileInputRef}
                 />
               </FormControl>
 
               {/* Dynamically render text boxes based on CSV content */}
               {fileUploaded && Object.keys(formValues).length > 0 && (
-                <>
-                  {/* Grouping fields in a grid layout */}
-                  <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4, xl: 6 }} spacing={2}>
-                    {Object.entries(formValues).map(([field, value]) => (
-                      <FormControl key={field} isInvalid={errors[field]}>
-                        <FormLabel textTransform="capitalize">{field}</FormLabel>
-                        <Input
-                          value={value}
-                          onChange={(e) => handleInputChange(field, e.target.value)}
-                          placeholder={field}
-                          background={inputBackground}
-                          type="text"
-                          variant="filled"
-                          size="lg"
-                        />
-                        <FormErrorMessage>{errors[field]?.message}</FormErrorMessage>
-                      </FormControl>
-                    ))}
-                  </SimpleGrid>
-                </>
+                <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4, xl: 6 }} spacing={2}>
+                  {Object.entries(formValues).map(([field, value]) => (
+                    <FormControl key={field} isInvalid={errors[field]}>
+                      <FormLabel textTransform="capitalize">{field}</FormLabel>
+                      <Input
+                        value={value}
+                        onChange={(e) => handleInputChange(field, e.target.value)}
+                        placeholder={field}
+                        background={inputBackground}
+                        type="text"
+                        variant="filled"
+                        size="lg"
+                      />
+                      <FormErrorMessage>{errors[field]?.message}</FormErrorMessage>
+                    </FormControl>
+                  ))}
+                </SimpleGrid>
               )}
-
-              {/* Example of status switch
-              <Controller
-                control={control}
-                name="status"
-                render={({ field }) => (
-                  <FormControl mt={6} display="flex" alignItems="center">
-                    <FormLabel htmlFor="is-done">Status</FormLabel>
-                    <Switch
-                      onChange={(e) => field.onChange(e.target.checked)}
-                      isChecked={field.value}
-                      id="id-done"
-                      size="lg"
-                      name="status"
-                      colorScheme="green"
-                      variant="ghost"
-                    />
-                  </FormControl>
-                )}
-              /> */}
             </ModalBody>
+
             <ModalFooter>
               <Stack direction="row" spacing={4}>
                 <Button onClick={onClose} disabled={isSubmitting}>
@@ -225,20 +213,21 @@ export const AddUpdateTypeModal = ({
 
                 <Button
                   colorScheme="green"
-                  type="submit"
+                  onClick={handleClear}
                   isLoading={isSubmitting}
-                  loadingText={editable ? "Updating" : "Creating"}
+                  loadingText={editable ? "Updating" : "Clearing"}
                 >
-                  {editable ? "Update" : "Create"}
+                  {editable ? "Update" : "Clear"}
                 </Button>
 
                 <Button
                   colorScheme="blue"
-                  onChange={handleFileChange}
-                  isLoading={false}
-                  loadingText="Uploading"
+                  type="submit"
+                  isLoading={isSubmitting}
+                  loadingText="Predicting"
+                  isDisabled={!fileUploaded}
                 >
-                  Upload
+                  Predict
                 </Button>
               </Stack>
             </ModalFooter>
