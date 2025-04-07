@@ -23,7 +23,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../services/axios";
 
-export const AddUpdateTodoModal = ({
+export const AddUpdateTypeModal = ({
   editable = false,
   defaultValues = {},
   onSuccess = () => {},
@@ -31,7 +31,7 @@ export const AddUpdateTodoModal = ({
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const { todoId } = useParams();
+  const { Id } = useParams();
   const {
     handleSubmit,
     register,
@@ -44,12 +44,12 @@ export const AddUpdateTodoModal = ({
   const onSubmit = async (values) => {
     try {
       if (editable) {
-        await axiosInstance.put(`/todo/${todoId}`, values);
+        await axiosInstance.put(`/type/${Id}`, values);
       } else {
-        await axiosInstance.post(`/todo/create/`, values);
+        await axiosInstance.post(`/type/create/`, values);
       }
       toast({
-        title: editable ? "Todo Updated" : "Todo Added",
+        title: editable ? "Attack Type Revised" : "Attack Type Check",
         status: "success",
         isClosable: true,
         diration: 1500,
@@ -87,7 +87,7 @@ export const AddUpdateTodoModal = ({
             <ModalBody>
               <FormControl isInvalid={errors.title}>
                 <Input
-                  placeholder="Todo Title...."
+                  placeholder="Attack Title...."
                   background={useColorModeValue("gray.300", "gray.600")}
                   type="text"
                   variant="filled"

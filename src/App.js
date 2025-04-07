@@ -8,8 +8,8 @@ import {
 import { Login } from "./components/Auth/Login";
 import { Register } from "./components/Auth/Register";
 import { NavBar } from "./components/Navbar/NavBar";
-import { TodoDetail } from "./components/Todo/TodoDetail";
-import { TodoList } from "./components/Todo/TodoList";
+import { TypeDetail } from "./components/Type/TypeDetail";
+import { TypeList } from "./components/Type/TypeList";
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<NavBar />}>
-          <Route index element={<TodoList />} />
-          <Route path=":todoId" element={<TodoDetail />} />
+          <Route index element={<TypeList />} />
+          <Route path=":Id" element={<TypeDetail />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
