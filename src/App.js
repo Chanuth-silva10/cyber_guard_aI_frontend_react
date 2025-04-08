@@ -5,25 +5,80 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import { Authenticated } from "./components/Auth/Authenticated";
 import { Login } from "./components/Auth/Login";
+import { PublicRoute } from "./components/Auth/PublicRoute";
 import { Register } from "./components/Auth/Register";
 import { NavBar } from "./components/Navbar/NavBar";
 import { TypeDetail } from "./components/Type/TypeDetail";
 import { TypeList } from "./components/Type/TypeList";
+import { AuthConsumer, AuthProvider } from "./context/JWTAuthContext";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<NavBar />}>
-          <Route index element={<TypeList />} />
-          <Route path=":Id" element={<TypeDetail />} />
-        </Route>
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </Router>
+    <>
+      <AuthProvider>
+        <Router>
+          <AuthConsumer>
+            {(auth) =>
+              !auth.isInitialized ? (
+                <Flex
+                  height="100vh"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Spinner
+                    thickness="4px"
+                    speed="0.65s"
+                    emptyColor="green.200"
+                    color="green.500"
+                    size="xl"
+                  />
+                </Flex>
+              ) : (
+                <Routes>
+                  <Route
+                    path="/login"
+                    element={
+                      <PublicRoute>
+                        <Login />
+                      </PublicRoute>
+                    }
+                  />
+                  <Route
+                    path="/register"
+                    element={
+                      <PublicRoute>
+                        <Register />
+                      </PublicRoute>
+                    }
+                  />
+                  <Route path="/" element={<NavBar />}>
+                    <Route
+                      path="/"
+                      element={
+                        <Authenticated>
+                          <TypeList />
+                        </Authenticated>
+                      }
+                    />
+                    <Route
+                      path=":Id"
+                      element={
+                        <Authenticated>
+                          <TypeDetail />
+                        </Authenticated>
+                      }
+                    />
+                  </Route>
+                  <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+              )
+            }
+          </AuthConsumer>
+        </Router>
+      </AuthProvider>
+    </>
   );
 }
 
