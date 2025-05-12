@@ -6,11 +6,11 @@ import {
   Routes,
 } from "react-router-dom";
 import { Authenticated } from "./components/Auth/Authenticated";
+import MultiStepForm from "./components/MultiStepForm/MultiStepForm";
 import { Login } from "./components/Auth/Login";
 import { PublicRoute } from "./components/Auth/PublicRoute";
 import { Register } from "./components/Auth/Register";
 import { NavBar } from "./components/Navbar/NavBar";
-import { TypeDetail } from "./components/Type/TypeDetail";
 import { TypeList } from "./components/Type/TypeList";
 import { AuthConsumer, AuthProvider } from "./context/JWTAuthContext";
 
@@ -54,22 +54,8 @@ function App() {
                     }
                   />
                   <Route path="/" element={<NavBar />}>
-                    <Route
-                      path="/"
-                      element={
-                        <Authenticated>
-                          <TypeList />
-                        </Authenticated>
-                      }
-                    />
-                    <Route
-                      path=":Id"
-                      element={
-                        <Authenticated>
-                          <TypeDetail />
-                        </Authenticated>
-                      }
-                    />
+                    <Route path="/" element={<TypeList />} />
+                    <Route path="/prediction" element={<MultiStepForm />} />
                   </Route>
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>

@@ -9,9 +9,12 @@ import {
 import { Outlet } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { ThemeToggler } from "../Theme/ThemeToggler";
+import { useNavigate } from "react-router-dom";
 
 export const NavBar = () => {
   const { logout } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <Box minHeight="100vh">
       <Flex
@@ -24,10 +27,16 @@ export const NavBar = () => {
         color="white"
       >
         <Text as="h2" fontSize={24} fontWeight="bold">
-        CyberGuard AI
+          CyberGuard AI
         </Text>
         <Stack direction="row" align="center" spacing={4}>
           <ThemeToggler size="lg" />
+          <Button colorScheme="green" onClick={() => navigate("/")}>
+            Home
+          </Button>
+          <Button colorScheme="green" onClick={() => navigate("/prediction")}>
+            Prediction
+          </Button>
           <Button onClick={logout} colorScheme="green">
             Logout
           </Button>

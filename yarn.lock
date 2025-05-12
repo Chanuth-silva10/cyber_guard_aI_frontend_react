@@ -1095,7 +1095,7 @@
     "copy-to-clipboard" "3.3.3"
     "framesync" "6.1.2"
 
-"@chakra-ui/react@^2.0.2":
+"@chakra-ui/react@^2.10.7":
   "integrity" "sha512-GX1dCmnvrxxyZEofDX9GMAtRakZJKnUqFM9k8qhaycPaeyfkiTNNTjhPNX917hgVx1yhC3kcJOs5IeC7yW56/g=="
   "resolved" "https://registry.npmjs.org/@chakra-ui/react/-/react-2.10.7.tgz"
   "version" "2.10.7"
@@ -1292,7 +1292,7 @@
   "resolved" "https://registry.npmjs.org/@emotion/memoize/-/memoize-0.7.4.tgz"
   "version" "0.7.4"
 
-"@emotion/react@^11.0.0-rc.0", "@emotion/react@>=11", "@emotion/react@11":
+"@emotion/react@^11.0.0-rc.0", "@emotion/react@^11.14.0", "@emotion/react@>=11":
   "integrity" "sha512-O000MLDBDdk/EohJPFUqvnp4qnHeYkVP5B0xEG0D/L7cOKP9kefu2DXn8dj74cQfsEzUqh+sr1RzFqiL1o+PpA=="
   "resolved" "https://registry.npmjs.org/@emotion/react/-/react-11.14.0.tgz"
   "version" "11.14.0"
@@ -1322,7 +1322,7 @@
   "resolved" "https://registry.npmjs.org/@emotion/sheet/-/sheet-1.4.0.tgz"
   "version" "1.4.0"
 
-"@emotion/styled@>=11", "@emotion/styled@11":
+"@emotion/styled@^11.14.0", "@emotion/styled@>=11":
   "integrity" "sha512-XxfOnXFffatap2IyCeJyNov3kiDQWoR08gPUQxvbL7fxKryGBKUZUkG6Hz48DZwVrJSVh9sJboyV1Ds4OW6SgA=="
   "resolved" "https://registry.npmjs.org/@emotion/styled/-/styled-11.14.0.tgz"
   "version" "11.14.0"
@@ -5169,7 +5169,7 @@
   "resolved" "https://registry.npmjs.org/fraction.js/-/fraction.js-4.2.0.tgz"
   "version" "4.2.0"
 
-"framer-motion@>=4.0.0", "framer-motion@6":
+"framer-motion@^6.5.1", "framer-motion@>=4.0.0":
   "integrity" "sha512-o1BGqqposwi7cgDrtg0dNONhkmPsUFDaLcKXigzuTFC5x58mE8iyTazxSudFzmT6MEyJKfjjU8ItoMe3W+3fiw=="
   "resolved" "https://registry.npmjs.org/framer-motion/-/framer-motion-6.5.1.tgz"
   "version" "6.5.1"
@@ -8646,6 +8646,11 @@
   "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.55.0.tgz"
   "version" "7.55.0"
 
+"react-icons@^5.5.0":
+  "integrity" "sha512-MEFcXdkP3dLo8uumGI5xN3lDFNsRtrjbOEKDLD7yv76v4wpnEq2Lt2qeHaQOr34I/wPN3s3+N08WkQ+CW37Xiw=="
+  "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-5.5.0.tgz"
+  "version" "5.5.0"
+
 "react-is@^16.13.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -8768,7 +8773,7 @@
     "get-nonce" "^1.0.0"
     "tslib" "^2.0.0"
 
-"react@^16.8.0 || ^17 || ^18 || ^19", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc", "react@^18.0.0", "react@^18.1.0", "react@>= 16", "react@>=16.8", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@>=16.8.0", "react@>=18":
+"react@*", "react@^16.8.0 || ^17 || ^18 || ^19", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc", "react@^18.0.0", "react@^18.1.0", "react@>= 16", "react@>=16.8", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@>=16.8.0", "react@>=18":
   "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
   "version" "18.1.0"
