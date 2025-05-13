@@ -1,4 +1,21 @@
-import { Select, Input, VStack, FormControl, FormLabel, Grid, GridItem } from "@chakra-ui/react";
+import {
+  Select,
+  Input,
+  VStack,
+  FormControl,
+  FormLabel,
+  Grid,
+  GridItem,
+  Text,
+} from "@chakra-ui/react";
+
+const isValidIP = (ip) => {
+  const ipv4Pattern =
+    /^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$/;
+  const ipv6Pattern =
+    /^(([0-9a-fA-F]{1,4}:){7}([0-9a-fA-F]{1,4}|:))|(::1)$/;
+  return ipv4Pattern.test(ip) || ipv6Pattern.test(ip);
+};
 
 const Step1NetworkData = ({ formData, setFormData }) => {
   const handleChange = (e) => {
@@ -23,7 +40,12 @@ const Step1NetworkData = ({ formData, setFormData }) => {
         </GridItem>
 
         <GridItem>
-          <FormControl>
+          <FormControl
+            isInvalid={
+              formData.Source_IP_Address &&
+              !isValidIP(formData.Source_IP_Address)
+            }
+          >
             <FormLabel>Source IP</FormLabel>
             <Input
               name="Source_IP_Address"
@@ -32,11 +54,22 @@ const Step1NetworkData = ({ formData, setFormData }) => {
               placeholder="Enter Source IP"
               focusBorderColor="green.500"
             />
+            {formData.Source_IP_Address &&
+              !isValidIP(formData.Source_IP_Address) && (
+                <Text fontSize="sm" color="red.400">
+                  Invalid IP address
+                </Text>
+              )}
           </FormControl>
         </GridItem>
 
         <GridItem>
-          <FormControl>
+          <FormControl
+            isInvalid={
+              formData.Destination_IP_Address &&
+              !isValidIP(formData.Destination_IP_Address)
+            }
+          >
             <FormLabel>Destination IP</FormLabel>
             <Input
               name="Destination_IP_Address"
@@ -45,6 +78,12 @@ const Step1NetworkData = ({ formData, setFormData }) => {
               placeholder="Enter Destination IP"
               focusBorderColor="green.500"
             />
+            {formData.Destination_IP_Address &&
+              !isValidIP(formData.Destination_IP_Address) && (
+                <Text fontSize="sm" color="red.400">
+                  Invalid IP address
+                </Text>
+              )}
           </FormControl>
         </GridItem>
 

@@ -1,4 +1,12 @@
-import { Input, Select, VStack, FormControl, FormLabel, Grid, GridItem } from "@chakra-ui/react";
+import {
+  Input,
+  Select,
+  VStack,
+  FormControl,
+  FormLabel,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 
 const Step4LogsAlerts = ({ formData, setFormData }) => {
   const handleChange = (e) => {
@@ -12,30 +20,54 @@ const Step4LogsAlerts = ({ formData, setFormData }) => {
         <GridItem>
           <FormControl>
             <FormLabel>Firewall Logs</FormLabel>
-            <Input
+            <Select
               name="Firewall_Logs"
               value={formData.Firewall_Logs}
               onChange={handleChange}
-              placeholder="Enter Firewall Logs"
               focusBorderColor="green.500"
-            />
+            >
+              <option value="">Select Firewall Log</option>
+              <option value="Log Data">Log Data</option>
+              <option value="No Log">No Log</option>
+            </Select>
           </FormControl>
         </GridItem>
 
         <GridItem>
           <FormControl>
             <FormLabel>IDS/IPS Alerts</FormLabel>
-            <Input
+            <Select
               name="IDS_IPS_Alerts"
               value={formData.IDS_IPS_Alerts}
               onChange={handleChange}
-              placeholder="Enter IDS/IPS Alerts"
               focusBorderColor="green.500"
-            />
+            >
+              <option value="">Select IDS/IPS Alert</option>
+              <option value="Alert Data">Alert Data</option>
+              <option value="No Data">No Data</option>
+            </Select>
           </FormControl>
         </GridItem>
 
-        <GridItem colSpan={2}>
+        <GridItem>
+          <FormControl>
+            <FormLabel>Attack Signature</FormLabel>
+            <Select
+              name="Attack_Signature"
+              value={formData.Attack_Signature}
+              onChange={(e) =>
+                setFormData({ ...formData, [e.target.name]: e.target.value })
+              }
+              focusBorderColor="green.500"
+            >
+              <option value="">Select Attack Signature</option>
+              <option value="Known Pattern A">Known Pattern A</option>
+              <option value="Known Pattern B">Known Pattern B</option>
+            </Select>
+          </FormControl>
+        </GridItem>
+
+        <GridItem>
           <FormControl>
             <FormLabel>Log Source</FormLabel>
             <Select
@@ -45,9 +77,8 @@ const Step4LogsAlerts = ({ formData, setFormData }) => {
               focusBorderColor="green.500"
             >
               <option value="">Select Log Source</option>
+              <option value="Server">Server</option>
               <option value="Firewall">Firewall</option>
-              <option value="IDS/IPS">IDS/IPS</option>
-              <option value="SIEM">SIEM</option>
             </Select>
           </FormControl>
         </GridItem>

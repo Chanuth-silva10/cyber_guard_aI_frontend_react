@@ -1,4 +1,12 @@
-import { Select, Input, VStack, FormControl, FormLabel, Grid, GridItem } from "@chakra-ui/react";
+import {
+  Select,
+  Input,
+  VStack,
+  FormControl,
+  FormLabel,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 
 const Step2ThreatAnalysis = ({ formData, setFormData }) => {
   const handleChange = (e) => {
@@ -19,7 +27,7 @@ const Step2ThreatAnalysis = ({ formData, setFormData }) => {
               type="number"
               min="0"
               max="100"
-              placeholder="Enter Anomaly Score"
+              placeholder="34.67"
               focusBorderColor="green.500"
             />
           </FormControl>
@@ -35,8 +43,9 @@ const Step2ThreatAnalysis = ({ formData, setFormData }) => {
               focusBorderColor="green.500"
             >
               <option value="">Select Traffic Type</option>
-              <option value="Normal">Normal</option>
-              <option value="Malicious">Malicious</option>
+              <option value="HTTP">HTTP</option>
+              <option value="DNS">DNS</option>
+              <option value="FTP">FTP</option>
             </Select>
           </FormControl>
         </GridItem>
@@ -64,9 +73,8 @@ const Step2ThreatAnalysis = ({ formData, setFormData }) => {
               focusBorderColor="green.500"
             >
               <option value="">Select Indicator</option>
-              <option value="None">None</option>
-              <option value="Malicious IP">Malicious IP</option>
-              <option value="Suspicious Payload">Suspicious Payload</option>
+              <option value="IoC Detected">IoC Detected</option>
+              <option value="IoC Not Detected">IoC Not Detected</option>
             </Select>
           </FormControl>
         </GridItem>
@@ -74,13 +82,16 @@ const Step2ThreatAnalysis = ({ formData, setFormData }) => {
         <GridItem>
           <FormControl>
             <FormLabel>Alerts/Warnings</FormLabel>
-            <Input
+            <Select
               name="Alerts_Warnings"
               value={formData.Alerts_Warnings}
               onChange={handleChange}
-              placeholder="Enter Alerts/Warnings"
               focusBorderColor="green.500"
-            />
+            >
+              <option value="">Select Alert Status</option>
+              <option value="Alert Triggered">Alert Triggered</option>
+              <option value="Not Triggered">Not Triggered</option>
+            </Select>
           </FormControl>
         </GridItem>
 
@@ -94,27 +105,9 @@ const Step2ThreatAnalysis = ({ formData, setFormData }) => {
               focusBorderColor="green.500"
             >
               <option value="">Select Action</option>
+              <option value="Logged">Logged</option>
               <option value="Blocked">Blocked</option>
-              <option value="Allowed">Allowed</option>
-              <option value="Quarantined">Quarantined</option>
-            </Select>
-          </FormControl>
-        </GridItem>
-
-        <GridItem colSpan={3}>
-          <FormControl>
-            <FormLabel>Severity Level</FormLabel>
-            <Select
-              name="Severity_Level"
-              value={formData.Severity_Level}
-              onChange={handleChange}
-              focusBorderColor="green.500"
-            >
-              <option value="">Select Severity Level</option>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-              <option value="Critical">Critical</option>
+              <option value="Ignored">Ignored</option>
             </Select>
           </FormControl>
         </GridItem>

@@ -45,9 +45,9 @@ const Step3UserDeviceInfo = ({ formData, setFormData }) => {
               focusBorderColor="green.500"
             >
               <option value="">Select Network Segment</option>
-              <option value="Internal">Internal</option>
-              <option value="External">External</option>
-              <option value="DMZ">DMZ</option>
+              <option value="Segment A">Segment A</option>
+              <option value="Segment B">Segment B</option>
+              <option value="Segment C">Segment C</option>
             </Select>
           </FormControl>
         </GridItem>
@@ -59,7 +59,7 @@ const Step3UserDeviceInfo = ({ formData, setFormData }) => {
               name="Geo_location_Data"
               value={formData.Geo_location_Data}
               onChange={handleChange}
-              placeholder="Enter Location"
+              placeholder="Ex: Nagpur, Chhattisgarh"
               focusBorderColor="green.500"
             />
           </FormControl>

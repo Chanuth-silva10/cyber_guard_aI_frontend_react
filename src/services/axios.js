@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://cyber-guard-ai-backend.onrender.com/api/v1/";
+const baseURL = "https://cyber-guard-ai-app.netlify.app/api/v1/";
 
 const axiosInstance = axios.create({
   baseURL,
